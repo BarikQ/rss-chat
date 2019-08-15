@@ -24,9 +24,10 @@ body {
 .chatContainer {
   width: 100%;
   height: 74vh;
-  background: white;
-  color: black;
+  background: black;
+  color: white;
   margin: 15px;
+  margin-bottom: 0;
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -42,6 +43,8 @@ body {
   font-size: 22px;
   padding: 5px;
   box-sizing: border-box;
+  color: white;
+  background: #343d46;
 }
 
 .chatForm>input:focus {
@@ -67,13 +70,16 @@ ul {
 .nickname {
   font-weight: 700;
   border: 2px solid rebeccapurple;
-  background: mintcream;
+  background: rgba(62, 78, 109, 1);
   border-radius: 10px;
   padding: 5px;
+  color: ghostwhite;
 }
 
 .message {
+  margin-left: 10px;
   font-weight: 500;
+  color: white;
 }
 
 .user-message {
