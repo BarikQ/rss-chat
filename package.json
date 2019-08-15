@@ -9,7 +9,7 @@
     "react-scripts": "3.1.0"
   },
   "scripts": {
-    "start": "npm run server",
+    "start": "react-scripts start",
     "react": "react-scripts start",
     "server": "nodemon src/server/index.js",
     "build": "react-scripts build",
@@ -30,9 +30,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "concurrently": "^4.1.1",
-    "nodemon": "^1.19.1"
   }
 }
