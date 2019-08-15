@@ -5,6 +5,7 @@
 body {
   background-color: #282c34;
   color: white;
+  padding: 20px 0;
 }
 
 .App-logo {
@@ -58,13 +59,13 @@ ul {
 
 .username {
   font-size: 30px;
-  position: absolute;
-  top: 5px;
 }
 
 .messageContainer {
   font-size: 120%;
   margin: 25px 0;
+  word-break: break-all;
+  line-height: 200%;
 }
 
 .nickname {
@@ -132,7 +133,7 @@ ul {
 }
 
 .connection {
-  margin-top: -60px;
+  margin-top: -7vh;
   text-align: center;
   font-size: 30px;
   color: red;
