@@ -22,7 +22,7 @@ export default class Chat extends React.Component {
   }
 
   initSocket = () => {
-    const socket = new WebSocket(socketURL || secondSocketUrl);
+    const socket = new WebSocket(secondSocketUrl);
 
     this.setState({ isOpen: true });
 
