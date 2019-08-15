@@ -135,7 +135,7 @@ export default class Chat extends React.Component {
 
     return (
       <>
-      <div className="username">Hello {this.state.user} !</div>
+      <div className="username">Hello, {this.state.user} !</div>
       <div className="chatContainer" id="chatContainer">
         <ul className="messages" id="messages" />
       </div>
