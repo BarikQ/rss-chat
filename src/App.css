@@ -61,14 +61,22 @@ ul {
 
 .messageContainer {
   font-size: 120%;
+  margin: 25px 0;
 }
 
 .nickname {
-  font-weight: 600;
+  font-weight: 700;
+  border: 2px solid rebeccapurple;
+  background: mintcream;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.message {
+  font-weight: 500;
 }
 
 .user-message {
-  text-shadow: 0 0px 20px royalblue;
   text-align: right;
 }
 
@@ -77,6 +85,14 @@ ul {
   color: rebeccapurple;
   font-weight: 600;
   font-size: 110%;
+}
+
+.user-message>.message {
+  border: 2px solid royalblue;
+  background: rgba(255, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 5px 15px;
+  font-weight: 600;
 }
 
 ::-webkit-scrollbar {

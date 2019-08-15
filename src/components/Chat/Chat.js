@@ -50,7 +50,7 @@ export default class Chat extends React.Component {
         chat.insertAdjacentHTML('beforeend', 
         `
           <li class="${itemClass}">
-            <span class="nickname">${elem.from}: </span>
+            <span class="nickname">${elem.from}</span>
             <span class="message">${elem.message}</span>
           </li>
         `);
