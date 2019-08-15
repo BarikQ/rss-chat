@@ -1,6 +1,7 @@
 import React from 'react';
 
-const socketURL = 'ws://st-chat.shas.tel' || 'wss://wssproxy.herokuapp.com/';
+const socketURL = 'ws://st-chat.shas.tel';
+const secondSocketUrl = 'wss://wssproxy.herokuapp.com/';
 
 export default class Chat extends React.Component {
   constructor(props) {
@@ -21,7 +22,7 @@ export default class Chat extends React.Component {
   }
 
   initSocket = () => {
-    const socket = new WebSocket(socketURL);
+    const socket = new WebSocket(socketURL || secondSocketUrl);
 
     this.setState({ isOpen: true });
 
