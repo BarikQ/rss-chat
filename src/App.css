@@ -5,7 +5,6 @@
 body {
   background-color: #282c34;
   color: white;
-  text-transform: capitalize;
 }
 
 .App-logo {
@@ -19,13 +18,117 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding: 0 7vw;
 }
 
-@keyframes App-logo-spin {
+.chatContainer {
+  width: 100%;
+  height: 74vh;
+  background: white;
+  color: black;
+  margin: 15px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.chatForm {
+  width: 100%;
+}
+
+.chatForm>input {
+  width: 100%;
+  height: 65px;
+  border: 10px solid black;
+  font-size: 22px;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.chatForm>input:focus {
+  outline: none;
+}
+
+ul {
+  list-style: none;
+  padding: 0 3vw;
+}
+
+.username {
+  font-size: 30px;
+  position: absolute;
+  top: 5px;
+}
+
+.messageContainer {
+  font-size: 120%;
+}
+
+.nickname {
+  font-weight: 600;
+}
+
+.user-message {
+  text-shadow: 0 0px 20px royalblue;
+  text-align: right;
+}
+
+.user-message>.nickname {
+  display: none;
+  color: rebeccapurple;
+  font-weight: 600;
+  font-size: 110%;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  cursor: pointer;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  cursor: pointer;
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  cursor: pointer;
+}
+
+::-webkit-resizer @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
+  }
+}
+
+.connection {
+  position: absolute;
+  bottom: 0;
+  left: 15px;
+  text-align: center;
+  font-size: 30px;
+  color: red;
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  
+  ::-webkit-scrollbar-track {
+    display: none;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    display: none;
   }
 }

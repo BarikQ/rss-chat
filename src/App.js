@@ -6,10 +6,11 @@ import './App.css';
 function App() {
 
   return (
-    <div className="container">
+    <>
       <img src={logo} className="App-logo" alt="logo" />
+      <div className="connection" id="connection">Error</div>
       <Layout title="rss chat" />
-    </div>
+    </>
   );
 }
 

@@ -1,10 +1,7 @@
 import React from 'react';
-import io from 'socket.io-client';
-import LoginForm from '../Login/LoginForm';
-import ChatContainer from '../Chat/ChatContainer';
-import { USER_CONNECTED, LOGOUT } from '../../Events';
 
-const socketURL = 'http://localhost:3231';
+import LoginForm from '../Login/LoginForm';
+import Chat from '../Chat/Chat';
 
 export default class Layout extends React.Component {
 
@@ -12,47 +9,32 @@ export default class Layout extends React.Component {
     super(props);
 
     this.state = {
-      socket: null
+      user: false,
+      messages: null
     };
   }
 
   componentDidMount() {
-    this.initSocket();
-  }
-
-  initSocket = () => {
-    const socket = io(socketURL);
-
-    socket.on('connect', () => {
-      console.log('connected');
-    })
-
-    this.setState( {socket} );
+    if(localStorage.getItem('username')) {
+      this.setState({ user: localStorage.getItem('username')});
+    }
   }
 
   setUser = (user) => {
-    const { socket } = this.state;
-    socket.emit(USER_CONNECTED, user);
     this.setState({ user });
-  }
-
-  logout = () => {
-    const { socket } = this.state;
-    socket.emit(LOGOUT);
-    this.setState( {user: null} );
+    localStorage.setItem('username', user);
   }
 
   render() {
-    const { title } = this.props;
-    const { socket, user } = this.state;
+    const { user } = this.state;
 
     return (
       <div className="container">
         {
-          !user?
-          <LoginForm socket={socket} setUser={this.setUser} />
+          user?
+          <Chat user={user} />
           :
-          <ChatContainer socket={socket}  user={user} logout={this.logout} />
+          <LoginForm setUser={this.setUser} />
         }
       </div>
     );

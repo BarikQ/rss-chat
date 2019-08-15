@@ -1,45 +1,37 @@
 import React from 'react';
-import { VERIFY_USER } from '../../Events';
 
 export default class LoginForm extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      nickname: '',
-      error: ''
+      nickname: ''
     };
   }
 
-  setUser = ({ user, isUser }) => {
-    console.log(user, isUser);
+  setUser = (user, isUser) => {
     if (isUser) {
-      this.setError('User name is already taken');
-    } else {
       this.props.setUser(user);
-      this.setError('');
+    } else {
+      alert('something gone wrong');
     }
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
 
-    const { socket } = this.props;
     const { nickname } = this.state;
+
+    this.setUser(nickname, true);
     
-    socket.emit(VERIFY_USER, nickname, this.setUser);
   };
 
   handleChange = (e) => {
     this.setState({ nickname: e.target.value });
   };
 
-  setError = (error) => {
-    this.setState({error});
-  }
-
   render() {
-    const { nickname, error } = this.state;
+    const { nickname } = this.state;
 
     return (
       <div className="login">
@@ -56,8 +48,8 @@ export default class LoginForm extends React.Component {
             value={nickname}
             onChange={this.handleChange}
             placeholder={'Your name'}
+            autoFocus
           />
-          <div className="error">{error? error:null}</div>
         </form>
       </div>
     );
