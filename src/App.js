@@ -8,7 +8,6 @@ function App() {
   return (
     <>
       <img src={logo} className="App-logo" alt="logo" />
-      <div className="connection" id="connection">Error</div>
       <Layout title="rss chat" />
     </>
   );

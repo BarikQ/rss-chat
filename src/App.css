@@ -110,9 +110,7 @@ ul {
 }
 
 .connection {
-  position: absolute;
-  bottom: 0;
-  left: 15px;
+  margin-top: -60px;
   text-align: center;
   font-size: 30px;
   color: red;

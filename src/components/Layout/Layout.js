@@ -30,6 +30,7 @@ export default class Layout extends React.Component {
 
     return (
       <div className="container">
+      <div className="connection" id="connection"></div>
         {
           user?
           <Chat user={user} />
