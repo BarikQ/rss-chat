@@ -11,7 +11,8 @@ export default class Chat extends React.Component {
       socket: null,
       user: this.props.user,
       message: '',
-      isOpen: false
+      isOpen: false,
+      notify: false
     }
   }
 
@@ -19,7 +20,12 @@ export default class Chat extends React.Component {
     this.initSocket();
     const chatContainer = document.querySelector('#chatContainer');
     chatContainer.scrollTop = chatContainer.scrollHeight;
-    Notification.requestPermission();
+    navigator.serviceWorker.register('Chat.js');
+    Notification.requestPermission((result) => {
+      if (result === 'granted') {
+        this.setState({ notify: true });
+      }
+    });
 
     window.addEventListener('resize', (event) => {
       const chatContainer = document.querySelector('#chatContainer');
@@ -29,17 +35,18 @@ export default class Chat extends React.Component {
   }
 
   notify = (dataDefault) => {
-    if (document.hidden) {
+    if(document.hidden) {
       dataDefault.forEach((elem, index) => {
-        if (index < 5) {
-          if (elem.from !== this.props.user) {
-              let notification = new Notification(
-                `${elem.from}`, 
-                {
-                  tag : "new-message",
-                  body : elem.message
-                });
-          }
+        if (index < 5 && elem.from !== this.props.user) {
+          navigator.serviceWorker.ready.then((registration) => {
+            registration.showNotification(
+              `${elem.from}`, {
+                vibrate: [200, 100, 200, 100, 200, 100, 200],
+                body: elem.message,
+                tag: 'new-message'
+              }
+            )
+          });
         }
       });
     }
@@ -62,11 +69,11 @@ export default class Chat extends React.Component {
 
       const dataDefault = JSON.parse(e.data);
 
-      if (Notification.permission === 'granted') {
+      if (this.state.notify) {
         this.notify(dataDefault);
 
       } else Notification.requestPermission((permission) => {
-        if (permission === 'granted') {
+        if (this.state.notify) {
           this.notify(dataDefault);
         }
       })
