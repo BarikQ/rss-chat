@@ -28,6 +28,24 @@ export default class Chat extends React.Component {
     });
   }
 
+  notify = (dataDefault) => {
+    if (document.hidden) {
+      dataDefault.forEach((elem, index) => {
+        if (index < 5) {
+          if (elem.from !== this.props.user) {
+              let notification = new Notification(
+                `${elem.from}`, 
+                {
+                  tag : "new-message",
+                  body : elem.message,
+                  icon: './../../logo.svg'
+                });
+          }
+        }
+      });
+    }
+  }
+
   initSocket = () => {
     const socket = new WebSocket(secondSocketUrl);
 
@@ -45,21 +63,14 @@ export default class Chat extends React.Component {
 
       const dataDefault = JSON.parse(e.data);
 
-      if (document.hidden) {
-        dataDefault.forEach((elem, index) => {
-          if (index < 5) {
-            if (elem.from !== this.props.user) {
-                let notification = new Notification(
-                  `${elem.from}`, 
-                  {
-                    tag : "new-message",
-                    body : elem.message,
-                    icon: './../../logo.svg'
-                  });
-            }
-          }
-        });
-      }
+      if (Notification.permission === 'granted') {
+        this.notify(dataDefault);
+
+      } else Notification.requestPermission((permission) => {
+        if (permission === 'granted') {
+          this.notify(dataDefault);
+        }
+      })
 
       const data = dataDefault.reverse();
 
