@@ -19,6 +19,13 @@ export default class Chat extends React.Component {
     this.initSocket();
     const chatContainer = document.querySelector('#chatContainer');
     chatContainer.scrollTop = chatContainer.scrollHeight;
+    Notification.requestPermission();
+
+    window.addEventListener('resize', (event) => {
+      const chatContainer = document.querySelector('#chatContainer');
+
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    });
   }
 
   initSocket = () => {
@@ -36,11 +43,29 @@ export default class Chat extends React.Component {
     socket.onmessage = (e) => {
       e.data.slice(0, 200);
 
-      const data = JSON.parse(e.data).reverse();
+      const dataDefault = JSON.parse(e.data);
+
+      if (document.hidden) {
+        dataDefault.forEach((elem, index) => {
+          if (index < 5) {
+            if (elem.from !== this.props.user) {
+                let notification = new Notification(
+                  `${elem.from}`, 
+                  {
+                    tag : "new-message",
+                    body : elem.message,
+                    icon: './../../logo.svg'
+                  });
+            }
+          }
+        });
+      }
+
+      const data = dataDefault.reverse();
 
       const chat = document.querySelector('#messages')
 
-      data.forEach((elem) => {
+      data.forEach((elem, index) => {
         let itemClass = 'messageContainer';
 
         if (elem.from === this.props.user) {
@@ -98,7 +123,7 @@ export default class Chat extends React.Component {
     const inputForm = document.querySelector('#message');
     const { socket } = this.state;
 
-    if (this.state.message === ' ') {
+    if (this.state.message === ' ' || this.state.message === '') {
       inputForm.value = '';
       return;
     }
@@ -135,7 +160,6 @@ export default class Chat extends React.Component {
 
     return (
       <>
-      <div className="username">Hello, {this.state.user} !</div>
       <div className="chatContainer" id="chatContainer">
         <ul className="messages" id="messages" />
       </div>
@@ -150,6 +174,14 @@ export default class Chat extends React.Component {
           autoFocus
           autoComplete="off">
         </input>
+        <div className="buttonContainer">
+          <input 
+            type="button" 
+            className="sendButton" 
+            onClick={this.handleSubmit}
+            placeholder="send"
+            />
+        </div>
       </form>
       </>
     )

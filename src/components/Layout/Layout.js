@@ -29,8 +29,9 @@ export default class Layout extends React.Component {
     const { user } = this.state;
 
     return (
-      <div className="container">
+      <>
       <div className="connection" id="connection"></div>
+      <div className="container">
         {
           user?
           <Chat user={user} />
@@ -38,6 +39,7 @@ export default class Layout extends React.Component {
           <LoginForm setUser={this.setUser} />
         }
       </div>
+      </>
     );
    }
 }
