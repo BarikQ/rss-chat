@@ -176,6 +176,20 @@ input:focus,
     padding: 0;
   }
 
+  .container {
+    height: 90vh;
+  }
+
+  .chatForm {
+    position: fixed;
+    bottom: 0;
+  }
+
+  .chatContainer {
+    height: 100%;
+    padding-bottom: 40px;
+  }
+
   ::-webkit-scrollbar {
     width: 8px;
   }
