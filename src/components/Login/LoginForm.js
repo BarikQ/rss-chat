@@ -34,7 +34,7 @@ export default class LoginForm extends React.Component {
     const { nickname } = this.state;
 
     return (
-      <div className="login">
+      <div className="loginContainer">
         <form onSubmit = {this.handleSubmit} className="login-form">
           <label htmlFor="nickname">
             <h2>
@@ -44,6 +44,7 @@ export default class LoginForm extends React.Component {
           <input 
             ref={(input) => { this.textInput = input }}
             type="text"
+            className="login"
             id="nickname"
             value={nickname}
             onChange={this.handleChange}

@@ -39,6 +39,15 @@ body {
   grid-template: 1fr / 8fr 1fr;
 }
 
+.login {
+  font-size: 22px;
+  padding: 5px;
+  box-sizing: border-box;
+  color: white;
+  background: #343d46;
+  border: none;
+}
+
 .chatForm>input[type='text'] {
   width: 100%;
   height: 65px;
