@@ -37,8 +37,7 @@ export default class Chat extends React.Component {
                 `${elem.from}`, 
                 {
                   tag : "new-message",
-                  body : elem.message,
-                  icon: './../../logo.svg'
+                  body : elem.message
                 });
           }
         }

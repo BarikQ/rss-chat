@@ -171,6 +171,11 @@ input:focus,
 }
 
 @media (max-width: 768px) {
+  .container,
+  body {
+    padding: 0;
+  }
+
   ::-webkit-scrollbar {
     width: 8px;
   }
