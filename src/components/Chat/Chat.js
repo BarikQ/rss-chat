@@ -11,8 +11,7 @@ export default class Chat extends React.Component {
       socket: null,
       user: this.props.user,
       message: '',
-      isOpen: false,
-      notify: false
+      isOpen: false
     }
   }
 
@@ -20,12 +19,7 @@ export default class Chat extends React.Component {
     this.initSocket();
     const chatContainer = document.querySelector('#chatContainer');
     chatContainer.scrollTop = chatContainer.scrollHeight;
-    navigator.serviceWorker.register('Chat.js');
-    Notification.requestPermission((result) => {
-      if (result === 'granted') {
-        this.setState({ notify: true });
-      }
-    });
+    Notification.requestPermission();
 
     window.addEventListener('resize', (event) => {
       const chatContainer = document.querySelector('#chatContainer');
@@ -35,18 +29,18 @@ export default class Chat extends React.Component {
   }
 
   notify = (dataDefault) => {
-    if(document.hidden) {
+    if (document.hidden) {
       dataDefault.forEach((elem, index) => {
-        if (index < 5 && elem.from !== this.props.user) {
-          navigator.serviceWorker.ready.then((registration) => {
-            registration.showNotification(
-              `${elem.from}`, {
-                vibrate: [200, 100, 200, 100, 200, 100, 200],
-                body: elem.message,
-                tag: 'new-message'
-              }
-            )
-          });
+        if (index < 5) {
+          if (elem.from !== this.props.user) {
+              let notification = new Notification(
+                `${elem.from}`, 
+                {
+                  tag : "new-message",
+                  body : elem.message,
+                  icon: './../../logo.svg'
+                });
+          }
         }
       });
     }
@@ -69,11 +63,11 @@ export default class Chat extends React.Component {
 
       const dataDefault = JSON.parse(e.data);
 
-      if (this.state.notify) {
+      if (Notification.permission === 'granted') {
         this.notify(dataDefault);
 
       } else Notification.requestPermission((permission) => {
-        if (this.state.notify) {
+        if (permission === 'granted') {
           this.notify(dataDefault);
         }
       })
